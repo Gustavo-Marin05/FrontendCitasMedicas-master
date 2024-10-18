@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial de Pacientes</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 18px;
+      text-align: left;
+    }
+    table th, table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    table th {
+      background-color: #f2f2f2;
+    }
+    .edit-button, .delete-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .delete-button {
+      background-color: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Historial de Pacientes</h1>
+    <button id="fetchRecordsBtn">Obtener Historiales</button>
+    <button id="addRecordBtn">Agregar Historial</button>
+    <table id="recordsTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Paciente</th>
+          <th>Detalles</th>
+          <th>Fecha de Creación</th>
+          <th>Operaciones</th>
+        </tr>
+      </thead>
+      <tbody id="recordsList"></tbody>
+    </table>
+    <form id="recordForm" style="display: none;">
+      <h2>Agregar/Editar Historial</h2>
+      <input type="hidden" id="recordId">
+      <label for="patient_id">Paciente</label>
+      <select id="patient_id" required></select><br>
+      <label for="details">Detalles</label>
+      <textarea id="details" required></textarea><br>
+      <label for="created_at">Fecha de Creación</label>
+      <input type="date" id="created_at" required><br><br>
+      <button type="submit">Guardar</button>
+      <button type="button" id="cancelRecordForm">Cancelar</button>
+    </form>
+  </div>
+  <script src="js/scripts.js"></script>
+  <script src="js/records.js"></script>
+</body>
+</html>

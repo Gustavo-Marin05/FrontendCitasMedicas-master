@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Colas</h1>
+    <button id="fetchQueuesBtn">Obtener Colas</button>
+    <button id="addQueueBtn">Agregar Cola</button>
+    <div id="queuesList"></div>
+    <form id="queueForm" style="display: none;">
+      <h2>Agregar/Editar Cola</h2>
+      <input type="hidden" id="queueId">
+      <label for="name">Nombre de la Cola</label>
+      <input type="text" id="name" name="name" required><br>
+      <button type="submit">Guardar</button>
+      <button type="button" id="cancelQueueForm">Cancelar</button>
+    </form>
+  </div>
+  <script src="js/scripts.js"></script>
+  <script src="js/queues.js"></script>
+</body>
+</html>

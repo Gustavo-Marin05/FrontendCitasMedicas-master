@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pacientes</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 18px;
+      text-align: left;
+    }
+    table th, table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    table th {
+      background-color: #f2f2f2;
+    }
+    .edit-button, .delete-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .delete-button {
+      background-color: #f44336;
+    }
+    .obtener-button{
+        background-color: aqua;
+        text-decoration: solid;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pacientes</h1>
+    <button id="fetchPatientsBtn" class="obtener-button">Obtener Pacientes</button>
+    <button id="addPatientBtn">Agregar Paciente</button>
+    <table id="patientsTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Telefono</th>
+          <th>Género</th>
+          <th>Operaciones</th>
+        </tr>
+      </thead>
+      <tbody id="patientsList"></tbody>
+    </table>
+    <form id="patientForm" style="display: none;">
+      <h2>Agregar/Editar Paciente</h2>
+      <input type="hidden" id="patientId">
+      <label for="name">Nombre Completo</label>
+      <input type="text" id="name" name="name" required><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br><br>
+      <label for="phone">Telefono</label>
+      <input type="number" id="phone" name="phone" required><br>
+      <label for="gender">Género</label>
+      <select id="gender" required>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+        <option value="Other">Otro</option>
+      </select><br><br>
+      <button type="submit">Guardar</button>
+      <button type="button" id="cancelPatientForm">Cancelar</button>
+    </form>
+  </div>
+  <script src="js/scripts.js"></script>
+  <script src="js/patients.js"></script>
+</body>
+</html>
