@@ -24,6 +24,7 @@ app.get('/login', (req, res) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Rutas para servir otras páginas
+
 app.get('/patients', (req, res) => res.sendFile(path.join(__dirname, 'public', 'patients.html')));
 app.get('/doctors', (req, res) => res.sendFile(path.join(__dirname, 'public', 'doctors.html')));
 app.get('/appointments', (req, res) => res.sendFile(path.join(__dirname, 'public', 'appointments.html')));
