@@ -1,9 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Llama la función para obtener los doctores al cargar la página
-  fetchDoctors();
-});
-
-function fetchDoctors() {
+document.getElementById('fetchDoctorsBtn').addEventListener('click', () => {
   fetch('/api/doctors')
     .then(handleApiError)
     .then(data => {
@@ -13,16 +8,12 @@ function fetchDoctors() {
       data.forEach(doctor => {
         const row = document.createElement('tr');
         row.innerHTML = `
-        <td>${doctor.id}</td>
-          <td class="tm-product-name">${doctor.name}</td>
+          <td>${doctor.id}</td>
+          <td>${doctor.name}</td>
           <td>${doctor.specialty}</td>
           <td>
-            <a class="tm-product-delete-link"  onclick='editDoctor(${JSON.stringify(doctor)})'>
-            <i class="far fa-edit tm-product-edit-icon"></i></a>
-            </a>
-            <a class="tm-product-delete-link" onclick='deleteDoctor(${doctor.id})'>
-            
-            <i class="far fa-trash-alt tm-product-edit-icon"></i></a>
+            <button class="edit-button" onclick='editDoctor(${JSON.stringify(doctor)})'>Editar</button>
+            <button class="delete-button" onclick='deleteDoctor(${doctor.id})'>Eliminar</button>
           </td>
         `;
         doctorsList.appendChild(row);
@@ -30,7 +21,7 @@ function fetchDoctors() {
       doctorsTable.style.display = data.length ? 'table' : 'none';
     })
     .catch(error => console.error('Error fetching doctors:', error));
-}
+});
 
 document.getElementById('addDoctorBtn').addEventListener('click', () => {
   document.getElementById('doctorForm').style.display = 'block';
@@ -56,7 +47,7 @@ document.getElementById('doctorForm').addEventListener('submit', event => {
     .then(() => {
       document.getElementById('doctorForm').reset();
       document.getElementById('doctorForm').style.display = 'none';
-      fetchDoctors(); // Actualiza la lista de doctores después de guardar
+      document.getElementById('fetchDoctorsBtn').click();
     })
     .catch(error => console.error('Error saving doctor:', error));
 });
@@ -77,7 +68,7 @@ function deleteDoctor(id) {
   if (confirm('¿Estás seguro de eliminar este doctor?')) {
     fetch(`/api/doctors/${id}`, { method: 'DELETE' })
       .then(handleApiError)
-      .then(() => fetchDoctors()) // Actualiza la lista de doctores después de eliminar
+      .then(() => document.getElementById('fetchDoctorsBtn').click())
       .catch(error => console.error('Error deleting doctor:', error));
   }
 }

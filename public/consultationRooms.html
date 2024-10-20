@@ -1,71 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salas de Consulta</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      font-size: 18px;
-      text-align: left;
-    }
-    table th, table td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-    }
-    table th {
-      background-color: #f2f2f2;
-    }
-    .edit-button, .delete-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .delete-button {
-      background-color: #f44336;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Salas de Consulta</h1>
-    <button id="fetchRoomsBtn">Obtener Salas</button>
-    <button id="addRoomBtn">Agregar Sala</button>
-    <table id="roomsTable" style="display: none;">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Ubicación</th>
-          <th>Operaciones</th>
-        </tr>
-      </thead>
-      <tbody id="roomsList"></tbody>
-    </table>
-    <form id="roomForm" style="display: none;">
-      <h2>Agregar/Editar Sala</h2>
-      <input type="hidden" id="roomId">
-      <label for="name">Nombre de la Sala</label>
-      <input type="text" id="name" name="name" required><br>
-      <label for="location">Ubicación</label>
-      <input type="text" id="location" name="location" required><br><br>
-      <button type="submit">Guardar</button>
-      <button type="button" id="cancelRoomForm">Cancelar</button>
-    </form>
-  </div>
-  <script src="js/scripts.js"></script>
-  <script src="js/consultationRooms.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salas de Consulta</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+      }
+      table th,
+      table td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+      table th {
+        background-color: #f2f2f2;
+      }
+      .edit-button,
+      .delete-button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .delete-button {
+        background-color: #f44336;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="logoutBtn">Cerrar Sesion</button>
+    <div class="container">
+      <h1>Salas de Consulta</h1>
+      <button id="fetchRoomsBtn">Obtener Salas</button>
+      <button id="addRoomBtn">Agregar Sala</button>
+      <table id="roomsTable" style="display: none">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Ubicación</th>
+            <th>Operaciones</th>
+          </tr>
+        </thead>
+        <tbody id="roomsList"></tbody>
+      </table>
+      <form id="roomForm" style="display: none">
+        <h2>Agregar/Editar Sala</h2>
+        <input type="hidden" id="roomId" />
+        <label for="name">Nombre de la Sala</label>
+        <input type="text" id="name" name="name" required /><br />
+        <label for="location">Ubicación</label>
+        <input type="text" id="location" name="location" required /><br /><br />
+        <button type="submit">Guardar</button>
+        <button type="button" id="cancelRoomForm">Cancelar</button>
+      </form>
+    </div>
+    <script src="js/scripts.js"></script>
+    <script src="js/consultationRooms.js"></script>
+  </body>
 </html>

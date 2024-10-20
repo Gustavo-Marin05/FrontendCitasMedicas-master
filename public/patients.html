@@ -5,112 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pacientes</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:400,700"
-    />
-    <link rel="stylesheet" href="css2/fontawesome.min.css" />
-    <link rel="stylesheet" href="css2/bootstrap.min.css" />
-    <link rel="stylesheet" href="css2/templatemo-style.css" />
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+      }
+      table th,
+      table td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+      table th {
+        background-color: #f2f2f2;
+      }
+      .edit-button,
+      .delete-button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .delete-button {
+        background-color: #f44336;
+      }
+      .obtener-button {
+        background-color: aqua;
+        text-decoration: solid;
+      }
+    </style>
   </head>
-  <body id="reportsPage">
-    <nav class="navbar navbar-expand-xl">
-      <div class="container h-100">
-        <a class="navbar-brand" href="/">
-          <h1 class="tm-site-title mb-0">Dentis Admin</h1>
-        </a>
-        <button
-          class="navbar-toggler ml-auto mr-0"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i class="fas fa-bars tm-nav-icon"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto h-100">
-            <li class="nav-item">
-              <a class="nav-link active" href="/">
-                <i class="fas fa-tachometer-alt"></i>
-                Dashboard
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link dropdown-toggle" href="/appointments">
-                <i class="far fa-file-alt"></i>
-                citas
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-
-            <!-- <li class="nav-item">
-
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="far fa-file-alt"></i>
-                        <span>
-                            Reports 
-                        </span>
-                    </a>
-                   
-                </li> -->
-            <!-- <li class="nav-item">
-            <a class="nav-link" href="/appointmentsByDoctorDate.html">
-              <i class="fas fa-shopping-cart"></i>
-              citas 2
-            </a>
-          </li> -->
-
-            <li class="nav-item">
-              <a class="nav-link" href="/doctors">
-                <i class="far fa-user"></i>
-                Doctores
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/patients">
-                <i class="far fa-user"></i>
-                Pacientes
-              </a>
-            </li>
-
-            <!-- 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/appointments" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-cog"></i>
-                        <span>
-                            Settings <i class="fas fa-angle-down"></i>
-                        </span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Billing</a>
-                        <a class="dropdown-item" href="#">Customize</a>
-                    </div>
-                </li> -->
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link d-block" href="login.html">
-                <b>login</b>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
+  <body>
+    <button id="logoutBtn">Cerrar Sesion</button>
     <div class="container">
       <h1>Pacientes</h1>
-      <!-- <button id="fetchPatientsBtn" class="obtener-button">
+      <button id="fetchPatientsBtn" class="obtener-button">
         Obtener Pacientes
       </button>
       <button id="addPatientBtn">Agregar Paciente</button>
@@ -145,99 +83,8 @@
         <button type="submit">Guardar</button>
         <button type="button" id="cancelPatientForm">Cancelar</button>
       </form>
-    </div>  -->
-
-
-
-
-
-
-
-
-
-    <div class="container mt-5">
-      <div class="row tm-content-row">
-        <div class="col-12 tm-block-col">
-          <div class="tm-bg-primary-dark tm-block tm-block-products">
-            <div class="tm-product-table-container">
-              <table
-                class="table table-hover tm-table-small tm-product-table"
-                id="patientsTable"
-              >
-                <thead>
-                  <tr>
-                    <th scope="col">&nbsp;</th>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Género</th>
-                    <th>Operaciones</th>
-                    <th scope="col">&nbsp;</th>
-                  </tr>
-                </thead>
-                <tbody id="patientsList"></tbody>
-              </table>
-            </div>
-            <!-- table container -->
-            <a
-            id="addPatientBtn"
-              class="btn btn-primary btn-block text-uppercase mb-3"
-              >Agregar paciente</a
-            >
-
-            <div class="col-12 mx-auto tm-login-col">
-              <div class="row mt-2">
-                <div class="col-12">
-                  <form
-                    id="doctorForm"
-                    style="display: none"
-                    class="tm-login-form"
-                    id="patientForm" style="display: none"
-                  >
-                    <h2>Agregar/Editar paciente</h2>
-                    <input type="hidden" id="doctorId" />
-                    <label for="name">Nombre Completo</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      class="form-control validate"
-                    /><br />
-                    <label for="specialty">Especialidad</label>
-                    <input
-                      type="text"
-                      id="specialty"
-                      name="specialty"
-                      required
-                      class="form-control validate"
-                    /><br /><br />
-                    <button
-                      type="submit"
-                      class="btn btn-primary btn-block text-uppercase mb-3"
-                    >
-                      Guardar
-                    </button>
-                    <button
-                      type="button"
-                      id="cancelDoctorForm"
-                      class="btn btn-primary btn-block text-uppercase mb-3"
-                    >
-                      Cancelar
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-
     <script src="js/scripts.js"></script>
     <script src="js/patients.js"></script>
-    <script src="js2/jquery-3.3.1.min.js"></script>
-    <script src="js2/bootstrap.min.js"></script>
   </body>
 </html>

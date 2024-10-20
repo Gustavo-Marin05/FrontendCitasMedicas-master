@@ -1,0 +1,22 @@
+[
+  {
+    "id": 2,
+    "name": "alvaro",
+    "specialty": "ortodoncia"
+  },
+  {
+    "id": 4,
+    "name": "Gustavo Marin Masti",
+    "specialty": "ortodoncia"
+  },
+  {
+    "id": 1,
+    "name": "Dr Gonzales quirto",
+    "specialty": "Cirugia"
+  },
+  {
+    "id": 5,
+    "name": "quiste",
+    "specialty": "rinoplastia"
+  }
+]

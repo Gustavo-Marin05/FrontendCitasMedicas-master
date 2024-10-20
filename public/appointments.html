@@ -1,83 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Citas</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      font-size: 18px;
-      text-align: left;
-    }
-    table th, table td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-    }
-    table th {
-      background-color: #f2f2f2;
-    }
-    .edit-button, .delete-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .delete-button {
-      background-color: #f44336;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Citas</h1>
-    <button id="fetchAppointmentsBtn">Obtener Citas</button>
-    <button id="addAppointmentBtn">Agregar Cita</button>
-    <table id="appointmentsTable" style="display: none;">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Paciente</th>
-          <th>Doctor</th>
-          <th>Sala de Consulta</th>
-          <th>Fecha</th>
-          <th>Hora</th>
-          <th>Estado</th>
-          <th>Operaciones</th>
-        </tr>
-      </thead>
-      <tbody id="appointmentsList"></tbody>
-    </table>
-    <form id="appointmentForm" style="display: none;">
-      <h2>Agregar/Editar Cita</h2>
-      <input type="hidden" id="appointmentId">
-      <label for="patient_id">Paciente</label>
-      <select id="patient_id" required></select><br>
-      <label for="doctor_id">Doctor</label>
-      <select id="doctor_id" required></select><br>
-      <label for="consultationRoom_id">Sala de Consulta</label>
-      <select id="consultationRoom_id" required></select><br>
-      <label for="date">Fecha</label>
-      <input type="date" id="date" required><br>
-      <label for="time">Hora</label>
-      <input type="time" id="time" required><br>
-      <label for="status">Estado</label>
-      <input type="text" id="status" required><br><br>
-      <button type="submit">Guardar</button>
-      <button type="button" id="cancelAppointmentForm">Cancelar</button>
-    </form>
-  </div>
-  <script src="js/scripts.js"></script>
-  <script src="js/appointments.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Citas</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+      }
+      table th,
+      table td {
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+      table th {
+        background-color: #f2f2f2;
+      }
+      .edit-button,
+      .delete-button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .delete-button {
+        background-color: #f44336;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="logoutBtn">Cerrar Sesion</button>
+    <div class="container">
+      <h1>Citas</h1>
+      <button id="fetchAppointmentsBtn">Obtener Citas</button>
+      <button id="addAppointmentBtn">Agregar Cita</button>
+      <table id="appointmentsTable" style="display: none">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Paciente</th>
+            <th>Doctor</th>
+            <th>Sala de Consulta</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Estado</th>
+            <th>Operaciones</th>
+          </tr>
+        </thead>
+        <tbody id="appointmentsList"></tbody>
+      </table>
+      <form id="appointmentForm" style="display: none">
+        <h2>Agregar/Editar Cita</h2>
+        <input type="hidden" id="appointmentId" />
+        <label for="patient_id">Paciente</label>
+        <select id="patient_id" required></select
+        ><br />
+        <label for="doctor_id">Doctor</label>
+        <select id="doctor_id" required></select
+        ><br />
+        <label for="consultationRoom_id">Sala de Consulta</label>
+        <select id="consultationRoom_id" required></select
+        ><br />
+        <label for="date">Fecha</label>
+        <input type="date" id="date" required /><br />
+        <label for="time">Hora</label>
+        <input type="time" id="time" required /><br />
+        <label for="status">Estado</label>
+        <input type="text" id="status" required /><br /><br />
+        <button type="submit">Guardar</button>
+        <button type="button" id="cancelAppointmentForm">Cancelar</button>
+      </form>
+    </div>
+    <script src="js/scripts.js"></script>
+    <script src="js/appointments.js"></script>
+  </body>
 </html>

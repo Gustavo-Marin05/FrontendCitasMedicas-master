@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consultar Citas Pendientes por Médico y Fecha</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Consultar Citas Pendientes por Médico y Fecha</h1>
-    <form id="appointmentsForm">
-      <label for="doctorSelect">Seleccionar Médico:</label>
-      <select id="doctorSelect" required></select><br>
-      <label for="date">Fecha:</label>
-      <input type="date" id="date" required><br>
-      <button type="submit">Consultar Citas</button>
-    </form>
-    <h2>Resultados:</h2>
-    <table id="appointmentsTable" class="styled-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Paciente</th>
-          <th>Doctor</th>
-          <th>Consultorio</th>
-          <th>Fecha</th>
-          <th>Hora</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-  <script src="js/appointmentsByDoctorDate.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultar Citas Pendientes por Médico y Fecha</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <button id="logoutBtn">Cerrar Sesion</button>
+    <div class="container">
+      <h1>Consultar Citas Pendientes por Médico y Fecha</h1>
+      <form id="appointmentsForm">
+        <label for="doctorSelect">Seleccionar Médico:</label>
+        <select id="doctorSelect" required></select
+        ><br />
+        <label for="date">Fecha:</label>
+        <input type="date" id="date" required /><br />
+        <button type="submit">Consultar Citas</button>
+      </form>
+      <h2>Resultados:</h2>
+      <table id="appointmentsTable" class="styled-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Paciente</th>
+            <th>Doctor</th>
+            <th>Consultorio</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <script src="js/scripts.js"></script>
+    <script src="js/appointmentsByDoctorDate.js"></script>
+  </body>
 </html>

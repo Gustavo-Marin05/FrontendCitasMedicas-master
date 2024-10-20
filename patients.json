@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Juan Perez",
+    "email": "JuanPerez12@gmail.com",
+    "phone": "123",
+    "gender": "Masculino"
+  },
+  {
+    "id": 2,
+    "name": "Ada",
+    "email": "Ada.@gmail.com",
+    "phone": "12345678",
+    "gender": "Femenino"
+  },
+  {
+    "id": 3,
+    "name": "Paola",
+    "email": "paola@gmail.com",
+    "phone": "123",
+    "gender": "Masculino"
+  },
+  {
+    "id": 4,
+    "name": "Paola",
+    "email": "paola@gmail.com",
+    "phone": "123",
+    "gender": "Masculino"
+  },
+  {
+    "id": 5,
+    "name": "Paola",
+    "email": "paola@gmail.com",
+    "phone": "123",
+    "gender": "Masculino"
+  },
+  {
+    "id": 6,
+    "name": "Paola",
+    "email": "paola@gmail.com",
+    "phone": "123",
+    "gender": "Masculino"
+  }
+]
