@@ -16,9 +16,15 @@
   </head>
 
   <body id="reportsPage">
-    <nav class="navbar navbar-expand-xl">
+    <nav class="navbar navbar-expand-xl w-100">
       <div class="container h-100">
         <a class="navbar-brand" href="/">
+          <img
+            src="img/LogoRH.png"
+            alt="Logo Admin"
+            class="mr-2"
+            style="height: 50px"
+          />
           <h1 class="tm-site-title mb-0">Dentis Admin</h1>
         </a>
         <button
@@ -43,31 +49,28 @@
               </a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link dropdown-toggle" href="/appointments">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 <i class="far fa-file-alt"></i>
-                citas
-                <span class="sr-only">(current)</span>
+                Citas
               </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/appointments"
+                  >Gestionar Citas</a
+                >
+                <a class="dropdown-item" href="/appointmentsByDoctorDate"
+                  >Consultar por Médico y Fecha</a
+                >
+              </div>
             </li>
-
-            <!-- <li class="nav-item">
-
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="false">
-                          <i class="far fa-file-alt"></i>
-                          <span>
-                              Reports 
-                          </span>
-                      </a>
-                     
-                  </li> -->
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="/appointmentsByDoctorDate.html">
-                <i class="fas fa-shopping-cart"></i>
-                citas 2
-              </a>
-            </li> -->
 
             <li class="nav-item">
               <a class="nav-link" href="/doctors">
@@ -82,22 +85,6 @@
                 Pacientes
               </a>
             </li>
-
-            <!-- 
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="/appointments" id="navbarDropdown" role="button" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-cog"></i>
-                          <span>
-                              Settings <i class="fas fa-angle-down"></i>
-                          </span>
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="#">Profile</a>
-                          <a class="dropdown-item" href="#">Billing</a>
-                          <a class="dropdown-item" href="#">Customize</a>
-                      </div>
-                  </li> -->
           </ul>
           <ul class="navbar-nav">
             <li class="nav-item">
