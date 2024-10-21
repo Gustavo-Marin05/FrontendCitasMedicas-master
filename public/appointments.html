@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Citas</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+  />
+  <link rel="stylesheet" href="css2/fontawesome.min.css" />
+  <link rel="stylesheet" href="css2/bootstrap.min.css" />
+  <link rel="stylesheet" href="css2/templatemo-style.css" />
     <style>
       table {
         width: 100%;
@@ -40,12 +47,105 @@
       }
     </style>
   </head>
-  <body>
-    <button id="logoutBtn">Cerrar Sesion</button>
+  <body id="reportsPage">
+
+    <nav class="navbar navbar-expand-xl">
+      <div class="container h-100">
+        <a class="navbar-brand" href="/">
+          <h1 class="tm-site-title mb-0">Dentis Admin</h1>
+        </a>
+        <button
+          class="navbar-toggler ml-auto mr-0"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars tm-nav-icon"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto h-100">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link dropdown-toggle" href="/appointments">
+                <i class="far fa-file-alt"></i>
+                citas
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+
+            <!-- <li class="nav-item">
+
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          <i class="far fa-file-alt"></i>
+                          <span>
+                              Reports 
+                          </span>
+                      </a>
+                     
+                  </li> -->
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="/appointmentsByDoctorDate.html">
+                <i class="fas fa-shopping-cart"></i>
+                citas 2
+              </a>
+            </li> -->
+
+            <li class="nav-item">
+              <a class="nav-link" href="/doctors">
+                <i class="far fa-user"></i>
+                Doctores
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/patients">
+                <i class="far fa-user"></i>
+                Pacientes
+              </a>
+            </li>
+
+            <!-- 
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="/appointments" id="navbarDropdown" role="button" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-cog"></i>
+                          <span>
+                              Settings <i class="fas fa-angle-down"></i>
+                          </span>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">Profile</a>
+                          <a class="dropdown-item" href="#">Billing</a>
+                          <a class="dropdown-item" href="#">Customize</a>
+                      </div>
+                  </li> -->
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link d-block" href="login.html" id="logoutBtn">
+                <b>cerrar sesion</b>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <div class="container">
       <h1>Citas</h1>
-      <button id="fetchAppointmentsBtn">Obtener Citas</button>
-      <button id="addAppointmentBtn">Agregar Cita</button>
+      <button id="fetchAppointmentsBtn" class="btn btn-primary btn-block text-uppercase mb-3">Obtener Citas</button>
+      <button id="addAppointmentBtn" class="btn btn-primary btn-block text-uppercase mb-3">Agregar Cita</button>
       <table id="appointmentsTable" style="display: none">
         <thead>
           <tr>
@@ -85,5 +185,7 @@
     </div>
     <script src="js/scripts.js"></script>
     <script src="js/appointments.js"></script>
+    <script src="js2/jquery-3.3.1.min.js"></script>
+    <script src="js2/bootstrap.min.js"></script>
   </body>
 </html>
