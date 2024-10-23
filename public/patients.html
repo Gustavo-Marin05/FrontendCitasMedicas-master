@@ -95,9 +95,6 @@
       </div>
     </nav>
 
-    <div class="container">
-      
-      
     <div class="container mt-5">
       <div class="row tm-content-row">
         <div class="col-12 tm-block-col">
@@ -105,18 +102,16 @@
             <div class="tm-product-table-container">
               <table
                 class="table table-hover tm-table-small tm-product-table"
-                id="patientsTable"
+                id="patientsTable" style="display: none;"
               >
                 <thead>
                   <tr>
-                    
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Telefono</th>
                     <th>Género</th>
                     <th>Operaciones</th>
-                    
                   </tr>
                 </thead>
                 <tbody id="patientsList"></tbody>
@@ -124,7 +119,7 @@
             </div>
             <!-- table container -->
             <a
-            id="addPatientBtn"
+              id="addPatientBtn"
               class="btn btn-primary btn-block text-uppercase mb-3"
               >Agregar paciente</a
             >
@@ -133,42 +128,26 @@
               <div class="row mt-2">
                 <div class="col-12">
                   <form
-                    id="doctorForm"
-                    style="display: none"
                     class="tm-login-form"
-                    id="patientForm" style="display: none"
+                    id="patientForm"
+                    style="display: none"
                   >
-                    <h2>Agregar/Editar paciente</h2>
-                    <input type="hidden" id="doctorId" />
-                    <label for="name">Nombre Completo</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      class="form-control validate"
-                    /><br />
-                    <label for="specialty">Especialidad</label>
-                    <input
-                      type="text"
-                      id="specialty"
-                      name="specialty"
-                      required
-                      class="form-control validate"
-                    /><br /><br />
-                    <button
-                      type="submit"
-                      class="btn btn-primary btn-block text-uppercase mb-3"
-                    >
-                      Guardar
-                    </button>
-                    <button
-                      type="button"
-                      id="cancelDoctorForm"
-                      class="btn btn-primary btn-block text-uppercase mb-3"
-                    >
-                      Cancelar
-                    </button>
+                  <h2>Agregar/Editar Paciente</h2>
+                  <input type="hidden" id="patientId" />
+                  <label for="name">Nombre Completo</label>
+                  <input type="text" id="name" name="name" required /><br />
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" required /><br /><br />
+                  <label for="phone">Telefono</label>
+                  <input type="number" id="phone" name="phone" required /><br />
+                  <label for="gender">Género</label>
+                  <select id="gender" required>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Other">Otro</option></select
+                  ><br /><br />
+                  <button type="submit">Guardar</button>
+                  <button type="button" id="cancelPatientForm">Cancelar</button>
                   </form>
                 </div>
               </div>
@@ -180,7 +159,9 @@
 
     <script src="js/scripts.js"></script>
     <script src="js/patients.js"></script>
-    <script src="js2/jquery-3.3.1.min.js"></script>
+
+
+   <script src="js2/jquery-3.3.1.min.js"></script>
     <script src="js2/bootstrap.min.js"></script>
   </body>
 </html>

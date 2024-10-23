@@ -72,13 +72,15 @@ document.getElementById('cancelPatientForm').addEventListener('click', () => {
 });
 
 function editPatient(patient) {
+  console.log('Editing patient:', patient);
   document.getElementById('patientId').value = patient.id;
   document.getElementById('name').value = patient.name;
   document.getElementById('email').value = patient.email;
   document.getElementById('phone').value = patient.phone;
   document.getElementById('gender').value = patient.gender;
-  document.getElementById('patientForm').style.display = 'block';
+  document.getElementById('patientForm').style.display = 'block'; // Muestra el formulario
 }
+
 
 function deletePatient(id) {
   if (confirm('¿Estás seguro de eliminar este paciente?')) {
