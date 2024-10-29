@@ -12,6 +12,44 @@
     <link rel="stylesheet" href="css2/fontawesome.min.css" />
     <link rel="stylesheet" href="css2/bootstrap.min.css" />
     <link rel="stylesheet" href="css2/templatemo-style.css" />
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: #435C70;
+        margin: 5% auto;
+        padding: 20px;
+        width: 90%;
+        max-width: 800px;
+        border-radius: 8px;
+        max-height: 80%; /* Limitar la altura máxima del contenido */
+        overflow-y: auto; /* Habilitar el scroll vertical */
+      }
+
+      .modal-content h2,
+      .modal-content h3,
+      .modal-content div,
+      .modal-content select,
+      .modal-content input,
+      .modal-content button {
+        margin-top: 10px;
+      }
+
+      .close {
+        float: right;
+        font-size: 10px;
+        cursor: pointer;
+      }
+
+    </style>
   </head>
   <body id="reportsPage">
     <nav class="navbar navbar-expand-xl w-100">
@@ -121,38 +159,48 @@
             <a
               id="addPatientBtn"
               class="btn btn-primary btn-block text-uppercase mb-3"
-              >Agregar paciente</a
-            >
-
-            <div class="col-12 mx-auto tm-login-col">
-              <div class="row mt-2">
-                <div class="col-12">
-                  <form
-                    class="tm-login-form"
-                    id="patientForm"
-                    style="display: none"
-                  >
-                  <h2>Agregar/Editar Paciente</h2>
-                  <input type="hidden" id="patientId" />
-                  <label for="name">Nombre Completo</label>
-                  <input type="text" id="name" name="name" required /><br />
-                  <label for="email">Email:</label>
-                  <input type="email" id="email" name="email" required /><br /><br />
-                  <label for="phone">Telefono</label>
-                  <input type="number" id="phone" name="phone" required /><br />
-                  <label for="gender">Género</label>
-                  <select id="gender" required>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                    <option value="Other">Otro</option></select
-                  ><br /><br />
-                  <button type="submit">Guardar</button>
-                  <button type="button" id="cancelPatientForm">Cancelar</button>
-                  </form>
-                </div>
-              </div>
-            </div>
+              >Agregar paciente</a>
           </div>
+        </div>
+      </div>
+    </div>
+    <div id="formModal" class="modal" onclick="ocultar()">
+      <div class="col-12 mx-auto tm-login-col">
+        <div class="row mt-2">
+          <div class="col-12">
+            <form
+              class="tm-login-form"
+              id="patientForm"
+              style="display: none; background-color: #435C70; padding: 10%; border-radius: 3px;"
+            >
+            <h2>Agregar/Editar Paciente</h2>
+            <input type="hidden" id="patientId" />
+            <label for="name">Nombre Completo</label>
+            <input type="text" id="name" name="name" required /><br />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required /><br /><br />
+            <label for="phone">Telefono</label>
+            <input type="number" id="phone" name="phone" required /><br />
+            <label for="gender">Género</label>
+            <select id="gender" required>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+              <option value="Other">Otro</option></select
+            ><br /><br />
+            <button type="submit">Guardar</button>
+            <button type="button" id="cancelPatientForm">Cancelar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal para mostrar y agregar recetas -->
+    <div id="recipeModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Receta para el paciente</h3>
+        <div id="recipeContent">
+          <!-- Contenido de la receta actual -->
         </div>
       </div>
     </div>

@@ -475,6 +475,129 @@ app.delete("/api/payments/:id", (req, res) => {
     }
   });
 });
+// API para manejo de recetas y medicamentos
+
+// Obtener todas las recetas
+app.get("/api/recipes", (req, res) => {
+  db.all("SELECT * FROM recipes", (err, rows) => {
+    if (err) {
+      res.status(500).send("Error al obtener las recetas");
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// Crear una nueva receta
+app.post("/api/recipes", (req, res) => {
+  const { patient_id, description } = req.body;
+  const query = "INSERT INTO recipes (patient_id, description) VALUES (?, ?)";
+  db.run(query, [patient_id, description], function (err) {
+    if (err) {
+      res.status(500).send("Error al crear la receta");
+    } else {
+      res.json({ id: this.lastID });
+    }
+  });
+});
+
+// Obtener todos los medicamentos
+app.get("/api/medications", (req, res) => {
+  db.all("SELECT * FROM medications", (err, rows) => {
+    if (err) {
+      res.status(500).send("Error al obtener los medicamentos");
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+app.get("/api/medications/:id", (req, res) => {
+  const { id } = req.params; // Extrayendo el id de los parámetros de la solicitud
+  const query = "SELECT * FROM medications WHERE id = ?"; // Usando un marcador de posición
+
+  db.all(query, [id], (err, rows) => {
+    if (err) {
+      res.status(500).send("Error al obtener los medicamentos");
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// Crear un nuevo medicamento
+app.post("/api/medications", (req, res) => {
+  const { name, dosage } = req.body;
+  const query = "INSERT INTO medications (name, dosage) VALUES (?, ?)";
+  db.run(query, [name, dosage], function (err) {
+    if (err) {
+      res.status(500).send("Error al agregar el medicamento");
+    } else {
+      res.json({ id: this.lastID });
+    }
+  });
+});
+
+// Agregar medicamento a una receta
+app.post("/api/recipes/:recipeId/medications", (req, res) => {
+  const { recipeId } = req.params;
+  const { medication_id } = req.body;
+  const query = "INSERT INTO recipe_medication (recipe_id, medication_id) VALUES (?, ?)";
+  db.run(query, [recipeId, medication_id], function (err) {
+    if (err) {
+      res.status(500).send("Error al agregar el medicamento a la receta");
+    } else {
+      res.json({ message: "Medicamento agregado a la receta", id: this.lastID });
+    }
+  });
+});
+
+// Obtener los medicamentos de una receta específica
+app.get("/api/recipes/:recipeId/medications", (req, res) => {
+  const { recipeId } = req.params;
+  const query = `
+    SELECT medications.* 
+    FROM medications 
+    JOIN recipe_medication ON medications.id = recipe_medication.medication_id 
+    WHERE recipe_medication.recipe_id = ?`;
+  db.all(query, [recipeId], (err, rows) => {
+    if (err) {
+      res.status(500).send("Error al obtener los medicamentos de la receta");
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// Obtener todos los detalles de las recetas para un paciente específico
+app.get("/api/patients/:patientId/prescriptions/details", (req, res) => {
+  const { patientId } = req.params;
+  const query = `
+    SELECT 
+      patients.name AS patient_name,
+      patients.email AS patient_email,
+      patients.phone AS patient_phone,
+      patients.gender AS patient_gender,
+      prescriptions.date AS prescription_date,
+      medications.name AS medication_name,
+      medications.description AS medication_description,
+      prescription_medication.dosage,
+      prescription_medication.frequency
+    FROM patients
+    JOIN prescriptions ON patients.id = prescriptions.patient_id
+    JOIN prescription_medication ON prescriptions.id = prescription_medication.prescription_id
+    JOIN medications ON prescription_medication.medication_id = medications.id
+    WHERE patients.id = ?;
+  `;
+  db.all(query, [patientId], (err, rows) => {
+    if (err) {
+      res.status(500).send("Error al obtener los detalles de las recetas");
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

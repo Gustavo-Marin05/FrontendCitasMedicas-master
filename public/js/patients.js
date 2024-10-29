@@ -25,6 +25,12 @@ function fetchPatients() {
             <a class="tm-product-delete-link" onclick='deletePatient(${patient.id})'>
               <i class="far fa-trash-alt tm-product-edit-icon"></i>
             </a>
+            <a class="tm-product-delete-link" onclick='mostrarReceta(${patient.id})'>
+              <i class="far fa-list-alt tm-product-edit-icon"></i>
+            </a>
+            <a class="tm-product-delete-link" onclick='agregarReceta(${patient.id})'>
+              <i class="far fa-list-alt tm-product-edit-icon"></i>
+            </a>
           </td>
         `;
         patientsList.appendChild(row);
@@ -72,6 +78,7 @@ document.getElementById('cancelPatientForm').addEventListener('click', () => {
 });
 
 function editPatient(patient) {
+  document.getElementById('formModal').style.display = 'block'
   console.log('Editing patient:', patient);
   document.getElementById('patientId').value = patient.id;
   document.getElementById('name').value = patient.name;
@@ -96,4 +103,82 @@ function handleApiError(response) {
     throw new Error('Network response was not ok');
   }
   return response.json();
+}
+
+// Función para mostrar la receta
+function mostrarReceta(patientId) {
+  // Abre el modal
+  document.getElementById('recipeModal').style.display = 'block';
+  
+  // Realiza la solicitud para obtener los datos de la receta
+  fetch(`/api/patients/${patientId}/prescriptions/details`)
+    .then(response => response.json())
+    .then(data => {
+      const recipeContent = document.getElementById('recipeContent');
+      recipeContent.innerHTML = ''; // Limpiar el contenido anterior
+
+      if (data.length > 0) {
+        // Agregar datos del paciente
+        const paciente = data[0];
+        recipeContent.innerHTML += `
+          <h4>Datos del Paciente</h4>
+          <p><strong>Nombre del paciente:</strong> ${paciente.patient_name}</p>
+          <p><strong>Email del paciente:</strong> ${paciente.patient_email}</p>
+          <p><strong>Teléfono del paciente:</strong> ${paciente.patient_phone}</p>
+          <p><strong>Género del paciente:</strong> ${paciente.patient_gender}</p>
+          <hr>
+        `;
+
+        // Agregar detalles de la receta y medicamentos
+        data.forEach(item => {
+          recipeContent.innerHTML += `
+            <h5>Detalles de la Prescripción</h5>
+            <p><strong>Fecha de prescripción:</strong> ${item.prescription_date}</p>
+            <h5>Medicamentos</h5>
+            <p><strong>Medicamento:</strong> ${item.medication_name}</p>
+            <p><strong>Descripción del medicamento:</strong> ${item.medication_description}</p>
+            <p><strong>Dosificación:</strong> ${item.dosage}</p>
+            <p><strong>Frecuencia:</strong> ${item.frequency}</p>
+            <hr>
+          `;
+        });
+      } else {
+        recipeContent.innerHTML = '<p>No se encontraron recetas para este paciente.</p>';
+      }
+    })
+    .catch(error => {
+      console.error('Error al obtener los detalles de la receta:', error);
+    });
+}
+
+
+function addMedicationToRecipe() {
+  const patientId = document.getElementById('patientId').value;
+  const medicationId = document.getElementById('medicationSelect').value;
+  const quantity = document.getElementById('medicationQuantity').value;
+
+  if (!quantity) {
+    alert('Por favor, ingrese una cantidad.');
+    return;
+  }
+
+  fetch(`/api/patients/${patientId}/recipe`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ medicationId, quantity })
+  })
+    .then(handleApiError)
+    .then(() => {
+      alert('Medicamento añadido a la receta.');
+      mostrarReceta(patientId); // Actualizar la receta en el modal
+    })
+    .catch(error => console.error('Error adding medication:', error));
+}
+
+function closeModal() {
+  document.getElementById('recipeModal').style.display = 'none';
+}
+
+function ocultar() {
+  document.getElementById('formModal').style.display = 'none';
 }
