@@ -598,6 +598,38 @@ app.get("/api/patients/:patientId/prescriptions/details", (req, res) => {
   });
 });
 
+// Ruta para insertar receta y medicamento
+app.post('/api/recetas', (req, res) => {
+  const { patientId, medicationId, dosage, frequency } = req.body;
+
+  // Insertar receta
+  db.run(
+    `INSERT INTO prescriptions (patient_id, date) VALUES (?, ?)`,
+    [patientId, new Date().toISOString().slice(0, 10)], // Fecha en formato YYYY-MM-DD
+    function (err) {
+      if (err) {
+        console.error("Error al insertar receta:", err);
+        return res.status(500).json({ success: false, message: "Error al insertar receta." });
+      }
+
+      const prescriptionId = this.lastID; // Obtener ID de la receta insertada
+
+      // Insertar medicamento en la receta
+      db.run(
+        `INSERT INTO prescription_medication (prescription_id, medication_id, dosage, frequency) VALUES (?, ?, ?, ?)`,
+        [prescriptionId, medicationId, dosage, frequency],
+        function (err) {
+          if (err) {
+            console.error("Error al insertar medicamento en receta:", err);
+            return res.status(500).json({ success: false, message: "Error al insertar medicamento." });
+          }
+
+          res.json({ success: true, message: "Receta y medicamento agregados exitosamente." });
+        }
+      );
+    }
+  );
+});
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

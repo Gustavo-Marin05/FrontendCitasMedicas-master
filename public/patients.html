@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css2/fontawesome.min.css" />
     <link rel="stylesheet" href="css2/bootstrap.min.css" />
     <link rel="stylesheet" href="css2/templatemo-style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
       .modal {
         display: none;
@@ -159,49 +160,55 @@
             <a
               id="addPatientBtn"
               class="btn btn-primary btn-block text-uppercase mb-3"
+              onclick="openModal(`patientForm`)"
               >Agregar paciente</a>
           </div>
         </div>
       </div>
     </div>
-    <div id="formModal" class="modal" onclick="ocultar()">
-      <div class="col-12 mx-auto tm-login-col">
-        <div class="row mt-2">
-          <div class="col-12">
-            <form
-              class="tm-login-form"
-              id="patientForm"
-              style="display: none; background-color: #435C70; padding: 10%; border-radius: 3px;"
-            >
-            <h2>Agregar/Editar Paciente</h2>
-            <input type="hidden" id="patientId" />
-            <label for="name">Nombre Completo</label>
-            <input type="text" id="name" name="name" required /><br />
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required /><br /><br />
-            <label for="phone">Telefono</label>
-            <input type="number" id="phone" name="phone" required /><br />
-            <label for="gender">Género</label>
-            <select id="gender" required>
-              <option value="Masculino">Masculino</option>
-              <option value="Femenino">Femenino</option>
-              <option value="Other">Otro</option></select
-            ><br /><br />
-            <button type="submit">Guardar</button>
-            <button type="button" id="cancelPatientForm">Cancelar</button>
-            </form>
-          </div>
-        </div>
+    <!-- Formulario para agregar/editar paciente -->
+    <div id="patientForm" style="display: none;" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('patientForm')">&times;</span>
+        <form>
+          <input type="hidden" id="patientId"><br>
+          <label>Nombre: <input id="name" required></label><br>
+          <label>Email: <input id="email" type="email" required></label><br>
+          <label>Teléfono: <input id="phone" required></label><br>
+          <label>Género: 
+            <select id="gender">
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="otro">Otro</option>
+            </select>
+          </label><br>
+          <button type="submit" onclick="closeModal(`patientForm`)">Guardar</button>
+          <button type="button" id="cancelPatientForm" onclick="closeModal(`patientForm`)">Cancelar</button>
+        </form>
       </div>
     </div>
-    <!-- Modal para mostrar y agregar recetas -->
-    <div id="recipeModal" class="modal">
+
+    <!-- Modal para mostrar receta de un paciente -->
+    <div id="recipeModal" class="modal" style="display: none;">
       <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h3>Receta para el paciente</h3>
-        <div id="recipeContent">
-          <!-- Contenido de la receta actual -->
-        </div>
+        <span class="close" onclick="closeModal('recipeModal')">&times;</span>
+        <h2>Receta del Paciente</h2>
+        <div id="recipeContent"></div>
+      </div>
+    </div>
+
+    <!-- Modal para agregar receta a un paciente -->
+    <div id="formModalAddRecipe" class="modal" style="display: none;">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('formModalAddRecipe')">&times;</span>
+        <h2>Agregar Receta</h2>
+        <label for="medicationSelect">Medicamento:</label>
+        <select id="medicationSelect"></select>
+        <label for="dosage">Dosificación:</label>
+        <input type="text" id="dosage" required>
+        <label for="frequency">Frecuencia:</label>
+        <input type="text" id="frequency" required>
+        <button id="addRecipeBtn">Agregar</button>
       </div>
     </div>
 

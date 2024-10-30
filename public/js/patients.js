@@ -1,5 +1,6 @@
 window.addEventListener('load', () => {
   fetchPatients();
+  fetchMedications();
 });
 
 function fetchPatients() {
@@ -29,7 +30,7 @@ function fetchPatients() {
               <i class="far fa-list-alt tm-product-edit-icon"></i>
             </a>
             <a class="tm-product-delete-link" onclick='agregarReceta(${patient.id})'>
-              <i class="far fa-list-alt tm-product-edit-icon"></i>
+              <i class="fa-solid fa-square-plus"></i>
             </a>
           </td>
         `;
@@ -78,22 +79,22 @@ document.getElementById('cancelPatientForm').addEventListener('click', () => {
 });
 
 function editPatient(patient) {
-  document.getElementById('formModal').style.display = 'block'
-  console.log('Editing patient:', patient);
+  document.getElementById('patientForm').style.display = 'block';
   document.getElementById('patientId').value = patient.id;
   document.getElementById('name').value = patient.name;
   document.getElementById('email').value = patient.email;
   document.getElementById('phone').value = patient.phone;
   document.getElementById('gender').value = patient.gender;
-  document.getElementById('patientForm').style.display = 'block'; // Muestra el formulario
+  document.getElementById('patientForm').style.display = 'block';
 }
-
 
 function deletePatient(id) {
   if (confirm('¿Estás seguro de eliminar este paciente?')) {
     fetch(`/api/patients/${id}`, { method: 'DELETE' })
       .then(handleApiError)
-      .then(() => fetchPatients())
+      .then(response => {
+        if (response.success) fetchPatients();
+      })
       .catch(error => console.error('Error deleting patient:', error));
   }
 }
@@ -105,20 +106,14 @@ function handleApiError(response) {
   return response.json();
 }
 
-// Función para mostrar la receta
 function mostrarReceta(patientId) {
-  // Abre el modal
   document.getElementById('recipeModal').style.display = 'block';
-  
-  // Realiza la solicitud para obtener los datos de la receta
   fetch(`/api/patients/${patientId}/prescriptions/details`)
     .then(response => response.json())
     .then(data => {
       const recipeContent = document.getElementById('recipeContent');
-      recipeContent.innerHTML = ''; // Limpiar el contenido anterior
-
+      recipeContent.innerHTML = '';
       if (data.length > 0) {
-        // Agregar datos del paciente
         const paciente = data[0];
         recipeContent.innerHTML += `
           <h4>Datos del Paciente</h4>
@@ -128,8 +123,6 @@ function mostrarReceta(patientId) {
           <p><strong>Género del paciente:</strong> ${paciente.patient_gender}</p>
           <hr>
         `;
-
-        // Agregar detalles de la receta y medicamentos
         data.forEach(item => {
           recipeContent.innerHTML += `
             <h5>Detalles de la Prescripción</h5>
@@ -146,39 +139,55 @@ function mostrarReceta(patientId) {
         recipeContent.innerHTML = '<p>No se encontraron recetas para este paciente.</p>';
       }
     })
-    .catch(error => {
-      console.error('Error al obtener los detalles de la receta:', error);
-    });
+    .catch(error => console.error('Error al obtener los detalles de la receta:', error));
 }
 
+function fetchMedications() {
+  fetch('/api/medications')
+    .then(response => response.json())
+    .then(medications => {
+      const medicationSelect = document.getElementById('medicationSelect');
+      medicationSelect.innerHTML = '';
+      medications.forEach(medication => {
+        const option = document.createElement('option');
+        option.value = medication.id;
+        option.textContent = medication.name;
+        medicationSelect.appendChild(option);
+      });
+    })
+    .catch(error => console.error('Error fetching medications:', error));
+}
 
-function addMedicationToRecipe() {
-  const patientId = document.getElementById('patientId').value;
+function addRecipeToPatient(patientId) {
   const medicationId = document.getElementById('medicationSelect').value;
-  const quantity = document.getElementById('medicationQuantity').value;
+  const dosage = document.getElementById('dosage').value;
+  const frequency = document.getElementById('frequency').value;
 
-  if (!quantity) {
-    alert('Por favor, ingrese una cantidad.');
-    return;
-  }
-
-  fetch(`/api/patients/${patientId}/recipe`, {
+  fetch('/api/recetas', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ medicationId, quantity })
+    body: JSON.stringify({ patientId, medicationId, dosage, frequency })
   })
-    .then(handleApiError)
-    .then(() => {
-      alert('Medicamento añadido a la receta.');
-      mostrarReceta(patientId); // Actualizar la receta en el modal
-    })
-    .catch(error => console.error('Error adding medication:', error));
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert("Receta y medicamento agregados exitosamente.");
+    } else {
+      alert("Error al agregar la receta.");
+    }
+  })
+  .catch(error => console.error("Error:", error));
 }
 
-function closeModal() {
-  document.getElementById('recipeModal').style.display = 'none';
+function agregarReceta(patientId) {
+  document.getElementById('formModalAddRecipe').style.display = 'block';
+  document.getElementById('addRecipeBtn').onclick = () => addRecipeToPatient(patientId);
 }
 
-function ocultar() {
-  document.getElementById('formModal').style.display = 'none';
+function openModal(modalId) {
+  document.getElementById(modalId).style.display = 'block';
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = 'none';
 }
